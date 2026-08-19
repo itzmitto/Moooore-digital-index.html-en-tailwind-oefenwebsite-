@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Codes — Project Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+          },
+          animation: {
+            "pulse-slow": "pulse 3s ease-in-out infinite",
+            "float": "float 6s ease-in-out infinite",
+          },
+          keyframes: {
+            float: {
+              "0%, 100%": {
+                transform: "translateY(0px)",
+              },
+              "50%": {
+                transform: "translateY(-8px)",
+              },
+            },
+          },
+        },
+      },
+    };
+  </script>
+</head>
+<body class="min-h-screen overflow-hidden bg-[#070b12] font-sans text-white">
+  <div class="pointer-events-none fixed inset-0 overflow-hidden">
+    <div class="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl"></div>
+    <div class="absolute right-0 top-1/4 h-96 w-96 rounded-full bg-blue-500/10 blur-3xl"></div>
+    <div class="absolute bottom-0 left-1/3 h-96 w-96 rounded-full bg-purple-500/5 blur-3xl"></div>
+  </div>
+  <header class="relative z-20 flex h-20 items-center justify-between border-b border-white/10 bg-[#0a0f18]/90 px-6 backdrop-blur-xl lg:px-8">
+    <div class="flex items-center gap-4">
+      <div class="flex h-11 w-11 items-center justify-center rounded-xl border border-cyan-400/20 bg-cyan-400/10 shadow-lg shadow-cyan-500/10">
+        <svg class="h-6 w-6 text-cyan-400" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m8 9-3 3 3 3m8-6 3 3-3 3M14 5l-4 14" />
+        </svg>
+      </div>
+      <div>
+        <h1 class="text-lg font-semibold tracking-tight">
+          My <span class="text-cyan-400">Codes</span>
+        </h1>
+        <p class="text-xs text-slate-500">Personal development archive</p>
+      </div>
+    </div>
+    <div class="hidden items-center gap-3 sm:flex">
+      <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5">
+        <span class="h-2 w-2 animate-pulse rounded-full bg-emerald-400"></span>
+        <span class="text-xs text-slate-400">System online</span>
+      </div>
+      <div class="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs text-slate-400">
+        HTML / Tailwind
+      </div>
+    </div>
+  </header>
+  <div class="relative z-10 flex h-[calc(100vh-5rem)]">
+    <aside class="flex w-[310px] shrink-0 flex-col border-r border-white/10 bg-[#0a0f18]/80 backdrop-blur-xl">
+      <div class="border-b border-white/10 p-5">
+        <div class="mb-4 flex items-center justify-between">
+          <div>
+            <p class="text-xs font-medium uppercase tracking-[0.2em] text-slate-500">
+              Workspace
+            </p>
+            <h2 class="mt-1 text-lg font-semibold">Projects</h2>
+          </div>
+          <div id="projectCount" class="rounded-lg border border-cyan-400/20 bg-cyan-400/10 px-2.5 py-1 text-xs font-semibold text-cyan-400">
+            150
+          </div>
+        </div>
+        <div class="relative">
+          <svg class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="7"></circle>
+            <path stroke-linecap="round" d="m20 20-4-4"></path>
+          </svg>
+          <input
+            id="searchInput"
+            type="text"
+            placeholder="Zoek project..."
+            class="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2.5 pl-10 pr-4 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-cyan-400/40 focus:bg-white/[0.05]"
+          />
+        </div>
+      </div>
+      <div class="flex-1 overflow-y-auto p-3 [scrollbar-color:#1e293b_transparent] [scrollbar-width:thin]">
+        <div id="projectList" class="space-y-1"></div>
+      </div>
+      <div class="border-t border-white/10 p-4">
+        <button
+          id="homeButton"
+          onclick="goHome()"
+          class="group flex w-full items-center gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-left transition hover:border-cyan-400/30 hover:bg-cyan-400/5"
+        >
+          <div class="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] text-slate-400 transition group-hover:border-cyan-400/20 group-hover:text-cyan-400">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 18l-6-6 6-6" />
+            </svg>
+          </div>
+          <div>
+            <p class="text-sm font-medium text-slate-200">Overzicht</p>
+            <p class="text-xs text-slate-500">Terug naar startpagina</p>
+          </div>
+        </button>
+      </div>
+    </aside>
+    <main class="relative flex min-w-0 flex-1 flex-col">
+      <div class="flex h-16 items-center justify-between border-b border-white/10 bg-[#0b111c]/60 px-5 backdrop-blur-xl lg:px-7">
+        <div class="flex min-w-0 items-center gap-3">
+          <div class="hidden items-center gap-2 text-slate-600 sm:flex">
+            <span class="font-mono text-xs">~/codes</span>
+            <span>/</span>
+          </div>
+          <div class="flex min-w-0 items-center gap-2">
+            <span id="currentProjectBadge" class="hidden rounded-md border border-cyan-400/20 bg-cyan-400/10 px-2 py-1 font-mono text-xs text-cyan-400">
+              project-001
+            </span>
+            <h2 id="currentProjectTitle" class="truncate text-sm font-medium text-slate-300">
+              Selecteer een project
+            </h2>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="hidden rounded-lg border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs text-slate-500 md:block">
+            Preview
+          </div>
+          <button
+            onclick="reloadProject()"
+            title="Project opnieuw laden"
+            class="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] text-slate-500 transition hover:border-cyan-400/30 hover:text-cyan-400"
+          >
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M20 11a8.1 8.1 0 0 0-15.5-3M4 4v4h4M4 13a8.1 8.1 0 0 0 15.5 3M20 20v-4h-4" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="relative flex-1 overflow-hidden p-4 lg:p-6">
+        <div class="relative h-full overflow-hidden rounded-2xl border border-white/10 bg-[#05080d] shadow-2xl shadow-black/40">
+          <div class="flex h-10 items-center border-b border-white/10 bg-[#0a0f17] px-4">
+            <div class="flex items-center gap-1.5">
+              <span class="h-2.5 w-2.5 rounded-full bg-red-400/70"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-yellow-400/70"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-green-400/70"></span>
+            </div>
+            <div class="mx-auto hidden rounded-md border border-white/5 bg-white/[0.02] px-4 py-1 text-[11px] font-mono text-slate-600 sm:block">
+              localhost / project-preview
+            </div>
+            <div class="w-[46px]"></div>
+          </div>
+          <div class="relative h-[calc(100%-2.5rem)]">
+            <iframe
+              id="projectFrame"
+              src=""
+              class="hidden h-full w-full border-0 bg-white"
+              title="Project preview"
+            ></iframe>
+            <div id="emptyMessage" class="absolute inset-0 flex items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_50%_40%,rgba(34,211,238,0.08),transparent_40%)]">
+              <div class="relative mx-auto max-w-lg px-6 text-center">
+                <div class="mx-auto mb-6 flex h-20 w-20 animate-float items-center justify-center rounded-2xl border border-cyan-400/20 bg-cyan-400/10 shadow-2xl shadow-cyan-500/10">
+                  <svg class="h-9 w-9 text-cyan-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 9h.01M12 9h.01M16 9h.01M8 13h.01M12 13h.01M16 13h.01M8 17h8M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Z" />
+                  </svg>
+                </div>
+                <p class="mb-2 font-mono text-xs uppercase tracking-[0.3em] text-cyan-400/70">
+                  Developer Workspace
+                </p>
+                <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                  Welcome to
+                  <span class="text-cyan-400">My Codes</span>
+                </h2>
+                <p class="mt-4 text-sm leading-6 text-slate-500">
+                  Selecteer links een project om de website direct
+                  in deze preview te laden.
+                </p>
+                <div class="mt-8 flex flex-wrap justify-center gap-2">
+                  <span class="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 font-mono text-xs text-slate-500">
+                    HTML
+                  </span>
+                  <span class="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 font-mono text-xs text-slate-500">
+                    CSS
+                  </span>
+                  <span class="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 font-mono text-xs text-slate-500">
+                    JavaScript
+                  </span>
+                  <span class="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 font-mono text-xs text-slate-500">
+                    Tailwind
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="absolute bottom-6 right-7 hidden items-center gap-3 lg:flex">
+        <div class="rounded-lg border border-white/10 bg-[#0a0f17]/90 px-3 py-2 text-xs text-slate-500 backdrop-blur-xl">
+          <span class="text-slate-600">Path:</span>
+          <span id="currentPath" class="font-mono text-slate-400">./codes/—/index.html</span>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script>
+    const totalProjects = 150;
+    const projectList = document.getElementById("projectList");
+    const projectFrame = document.getElementById("projectFrame");
+    const emptyMessage = document.getElementById("emptyMessage");
+    const searchInput = document.getElementById("searchInput");
+    const projectCount = document.getElementById("projectCount");
+    const currentProjectBadge = document.getElementById("currentProjectBadge");
+    const currentProjectTitle = document.getElementById("currentProjectTitle");
+    const currentPath = document.getElementById("currentPath");
+    let activeProject = null;
+    function createProjectButtons() {
+      projectList.innerHTML = "";
+      for (let i = 1; i <= totalProjects; i++) {
+        createProjectButton(i);
+      }
+      updateProjectCount(totalProjects);
+    }
+    function createProjectButton(num) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.dataset.project = num;
+      button.className = `
+        group flex w-full items-center gap-3 rounded-xl border border-transparent
+        px-3 py-2.5 text-left transition-all duration-200
+        hover:border-white/10 hover:bg-white/[0.04]
+      `;
+      button.innerHTML = `
+        <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.02] font-mono text-xs text-slate-600 transition-all duration-200 group-hover:border-cyan-400/20 group-hover:bg-cyan-400/5 group-hover:text-cyan-400">
+          ${String(num).padStart(3, "0")}
+        </div>
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center justify-between gap-2">
+            <span class="truncate text-sm font-medium text-slate-400 transition-colors group-hover:text-slate-200">
+              Project ${num}
+            </span>
+            <span class="text-[10px] font-mono text-slate-700">
+              ${String(num).padStart(3, "0")}
+            </span>
+          </div>
+          <span class="text-[11px] text-slate-700 transition-colors group-hover:text-slate-500">
+            ./codes/${num}
+          </span>
+        </div>
+      `;
+      button.onclick = () => loadProject(num);
+      projectList.appendChild(button);
+    }
+    function loadProject(num) {
+      activeProject = num;
+      projectFrame.src = `./codes/${num}/index.html`;
+      projectFrame.classList.remove("hidden");
+      emptyMessage.classList.add("hidden");
+      currentProjectBadge.classList.remove("hidden");
+      currentProjectBadge.textContent = `project-${String(num).padStart(3, "0")}`;
+      currentProjectTitle.textContent = `Project ${num}`;
+      currentPath.textContent = `./codes/${num}/index.html`;
+      updateActiveButton();
+    }
+    function updateActiveButton() {
+      document.querySelectorAll("[data-project]").forEach((button) => {
+        const num = Number(button.dataset.project);
+        const numberBox = button.querySelector("div");
+        const title = button.querySelector("span");
+        if (num === activeProject) {
+          button.classList.remove("border-transparent");
+          button.classList.add("border-cyan-400/20", "bg-cyan-400/5");
+          numberBox.classList.remove("border-white/10", "bg-white/[0.02]", "text-slate-600");
+          numberBox.classList.add("border-cyan-400/20", "bg-cyan-400/10", "text-cyan-400");
+          title.classList.remove("text-slate-400");
+          title.classList.add("text-white");
+        } else {
+          button.classList.add("border-transparent");
+          button.classList.remove("border-cyan-400/20", "bg-cyan-400/5");
+          numberBox.classList.add("border-white/10", "bg-white/[0.02]", "text-slate-600");
+          numberBox.classList.remove("border-cyan-400/20", "bg-cyan-400/10", "text-cyan-400");
+          title.classList.add("text-slate-400");
+          title.classList.remove("text-white");
+        }
+      });
+    }
+    function goHome() {
+      activeProject = null;
+      projectFrame.src = "";
+      projectFrame.classList.add("hidden");
+      emptyMessage.classList.remove("hidden");
+      currentProjectBadge.classList.add("hidden");
+      currentProjectTitle.textContent = "Selecteer een project";
+      currentPath.textContent = "./codes/—/index.html";
+      updateActiveButton();
+    }
+    function reloadProject() {
+      if (!activeProject) return;
+      projectFrame.src = "";
+      setTimeout(() => {
+        projectFrame.src = `./codes/${activeProject}/index.html`;
+      }, 50);
+    }
+    function updateProjectCount(count) {
+      projectCount.textContent = count;
+    }
+    searchInput.addEventListener("input", function () {
+      const query = this.value.toLowerCase().trim();
+      let visibleProjects = 0;
+      document.querySelectorAll("[data-project]").forEach((button) => {
+        const projectNumber = button.dataset.project;
+        const matches =
+          `project ${projectNumber}`.includes(query) ||
+          projectNumber.includes(query);
+        button.classList.toggle("hidden", !matches);
+        if (matches) visibleProjects++;
+      });
+      updateProjectCount(visibleProjects);
+    });
+    projectFrame.addEventListener("load", function () {
+      if (activeProject) {
+        currentProjectTitle.textContent = `Project ${activeProject}`;
+      }
+    });
+    createProjectButtons();
+  </script>
+</body>
+</html>
