@@ -1,10 +1,203 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ladning page project</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body></body>
-</html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexora — Infrastructure for modern teams</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ["Inter", "Arial", "Helvetica", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+</head>
+<body class="bg-[#f3f4f6] font-sans text-[#111318]">
+  <div class="min-h-screen">
+    <header class="border-b border-black/10 bg-[#f3f4f6]">
+      <div class="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-5 lg:px-10">
+        <a href="#" class="flex items-center gap-3">
+          <div class="flex h-8 w-8 items-center justify-center bg-[#111318] text-sm font-bold text-white">
+            N
+          </div>
+          <span class="text-sm font-semibold tracking-[0.18em]">
+            NEXORA
+          </span>
+        </a>
+        <nav class="hidden items-center gap-8 text-sm text-black/60 md:flex">
+          <a href="#" class="transition hover:text-black">Platform</a>
+          <a href="#" class="transition hover:text-black">Solutions</a>
+          <a href="#" class="transition hover:text-black">Developers</a>
+          <a href="#" class="transition hover:text-black">Company</a>
+        </nav>
+        <div class="flex items-center gap-3">
+          <a href="#" class="hidden text-sm text-black/60 transition hover:text-black sm:block">
+            Sign in
+          </a>
+          <a href="#" class="bg-[#111318] px-5 py-2.5 text-sm font-medium text-white transition hover:bg-[#24272e]">
+            Get started
+          </a>
+        </div>
+      </div>
+    </header>
+    <main>
+      <section class="border-b border-black/10">
+        <div class="mx-auto grid min-h-[760px] max-w-[1400px] lg:grid-cols-[1.15fr_0.85fr]">
+          <div class="flex flex-col justify-between border-r-0 border-black/10 px-6 py-16 lg:border-r lg:px-10 lg:py-20">
+            <div>
+              <div class="mb-10 inline-flex items-center gap-2 border border-black/10 bg-white px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-black/50">
+                <span class="h-1.5 w-1.5 bg-emerald-500"></span>
+                Infrastructure · 01
+              </div>
+              <h1 class="max-w-4xl text-5xl font-semibold leading-[0.95] tracking-[-0.045em] sm:text-6xl lg:text-8xl">
+                Infrastructure
+                <span class="block text-black/35">without the noise.</span>
+              </h1>
+              <p class="mt-8 max-w-xl text-base leading-7 text-black/55 sm:text-lg">
+                Nexora gives product teams a dependable place to build, deploy and operate modern applications without managing a maze of infrastructure.
+              </p>
+              <div class="mt-10 flex flex-wrap gap-3">
+                <a href="#" class="bg-[#111318] px-6 py-3.5 text-sm font-medium text-white transition hover:bg-[#24272e]">
+                  Start building
+                </a>
+                <a href="#" class="border border-black/10 bg-white px-6 py-3.5 text-sm font-medium text-black transition hover:border-black/20">
+                  Explore platform
+                </a>
+              </div>
+            </div>
+            <div class="mt-20 grid max-w-2xl grid-cols-2 border-t border-black/10 sm:grid-cols-4">
+              <div class="border-r border-black/10 py-5 pr-5">
+                <div class="text-2xl font-semibold tracking-tight">99.99%</div>
+                <div class="mt-1 text-xs text-black/45">Uptime</div>
+              </div>
+              <div class="border-r-0 border-black/10 py-5 pl-5 sm:border-r sm:pl-5">
+                <div class="text-2xl font-semibold tracking-tight">38ms</div>
+                <div class="mt-1 text-xs text-black/45">Avg latency</div>
+              </div>
+              <div class="border-r border-black/10 py-5 pr-5 sm:pl-5">
+                <div class="text-2xl font-semibold tracking-tight">42</div>
+                <div class="mt-1 text-xs text-black/45">Regions</div>
+              </div>
+              <div class="py-5 pl-5">
+                <div class="text-2xl font-semibold tracking-tight">24/7</div>
+                <div class="mt-1 text-xs text-black/45">Monitoring</div>
+              </div>
+            </div>
+          </div>
+          <div class="relative min-h-[520px] overflow-hidden bg-[#111318] text-white">
+            <div class="absolute inset-0 opacity-[0.08]" style="background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px); background-size: 56px 56px;"></div>
+            <div class="absolute left-8 top-8 text-[10px] font-medium uppercase tracking-[0.25em] text-white/35">
+              Production environment
+            </div>
+            <div class="absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center px-8">
+              <div class="w-full max-w-lg border border-white/10 bg-[#171a20] shadow-2xl">
+                <div class="flex items-center justify-between border-b border-white/10 px-5 py-4">
+                  <div class="flex items-center gap-3">
+                    <div class="h-2 w-2 rounded-full bg-emerald-400"></div>
+                    <span class="font-mono text-xs text-white/70">api.nexora.dev</span>
+                  </div>
+                  <span class="text-[10px] uppercase tracking-[0.2em] text-white/30">live</span>
+                </div>
+                <div class="grid grid-cols-2 border-b border-white/10">
+                  <div class="border-r border-white/10 p-5">
+                    <div class="text-[10px] uppercase tracking-[0.2em] text-white/30">Requests</div>
+                    <div class="mt-3 text-2xl font-semibold">2.84M</div>
+                    <div class="mt-2 text-xs text-emerald-400">+14.8% this week</div>
+                  </div>
+                  <div class="p-5">
+                    <div class="text-[10px] uppercase tracking-[0.2em] text-white/30">Latency</div>
+                    <div class="mt-3 text-2xl font-semibold">38ms</div>
+                    <div class="mt-2 text-xs text-white/35">p95 response</div>
+                  </div>
+                </div>
+                <div class="p-5">
+                  <div class="mb-5 flex items-center justify-between">
+                    <span class="text-[10px] uppercase tracking-[0.2em] text-white/30">Traffic</span>
+                    <span class="font-mono text-[10px] text-white/30">24H</span>
+                  </div>
+                  <div class="flex h-36 items-end gap-2">
+                    <div class="w-full bg-white/10" style="height: 28%"></div>
+                    <div class="w-full bg-white/15" style="height: 46%"></div>
+                    <div class="w-full bg-white/20" style="height: 38%"></div>
+                    <div class="w-full bg-white/20" style="height: 61%"></div>
+                    <div class="w-full bg-white/30" style="height: 53%"></div>
+                    <div class="w-full bg-white/25" style="height: 73%"></div>
+                    <div class="w-full bg-white/30" style="height: 66%"></div>
+                    <div class="w-full bg-white/40" style="height: 86%"></div>
+                    <div class="w-full bg-white/30" style="height: 70%"></div>
+                    <div class="w-full bg-white/50" style="height: 94%"></div>
+                    <div class="w-full bg-white/30" style="height: 72%"></div>
+                    <div class="w-full bg-emerald-400" style="height: 88%"></div>
+                  </div>
+                </div>
+                <div class="grid grid-cols-3 border-t border-white/10">
+                  <div class="border-r border-white/10 px-4 py-4">
+                    <div class="text-[9px] uppercase tracking-[0.18em] text-white/25">Status</div>
+                    <div class="mt-1 text-xs text-emerald-400">Healthy</div>
+                  </div>
+                  <div class="border-r border-white/10 px-4 py-4">
+                    <div class="text-[9px] uppercase tracking-[0.18em] text-white/25">Build</div>
+                    <div class="mt-1 font-mono text-xs text-white/60">#1842</div>
+                  </div>
+                  <div class="px-4 py-4">
+                    <div class="text-[9px] uppercase tracking-[0.18em] text-white/25">Region</div>
+                    <div class="mt-1 text-xs text-white/60">AMS-01</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="absolute bottom-8 right-8 text-[10px] uppercase tracking-[0.25em] text-white/25">
+              Amsterdam · 52.3676° N
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="border-b border-black/10 bg-white">
+        <div class="mx-auto max-w-[1400px] px-6 py-24 lg:px-10">
+          <div class="grid gap-12 lg:grid-cols-[0.7fr_1.3fr]">
+            <div>
+              <div class="text-[11px] font-semibold uppercase tracking-[0.2em] text-black/35">
+                02 · What we do
+              </div>
+              <h2 class="mt-4 max-w-md text-4xl font-semibold tracking-[-0.035em] sm:text-5xl">
+                The boring parts should stay boring.
+              </h2>
+            </div>
+            <div class="grid border-l border-black/10 sm:grid-cols-2">
+              <article class="border-b border-black/10 p-7 sm:border-r sm:border-b-0">
+                <div class="mb-10 flex items-center justify-between">
+                  <span class="font-mono text-xs text-black/30">01</span>
+                  <span class="text-xs uppercase tracking-[0.2em] text-black/35">Deploy</span>
+                </div>
+                <h3 class="text-xl font-semibold">Ship with confidence.</h3>
+                <p class="mt-4 max-w-sm text-sm leading-6 text-black/50">
+                  Move from commit to production with predictable builds, repeatable environments and sensible defaults.
+                </p>
+              </article>
+              <article class="border-b border-black/10 p-7 sm:border-b-0">
+                <div class="mb-10 flex items-center justify-between">
+                  <span class="font-mono text-xs text-black/30">02</span>
+                  <span class="text-xs uppercase tracking-[0.2em] text-black/35">Operate</span>
+                </div>
+                <h3 class="text-xl font-semibold">Know what matters.</h3>
+                <p class="mt-4 max-w-sm text-sm leading-6 text-black/50">
+                  See application health, traffic and performance in one place without drowning in dashboards.
+                </p>
+              </article>
+              <article class="border-t border-black/10 p-7 sm:border-r">
+                <div class="mb-10 flex items-center justify-between">
+                  <span class="font-mono text-xs text-black/30">03</span>
+                  <span class="text-xs uppercase tracking-[0.2em] text-black/35">Scale</span>
+                </div>
+                <h3 class="text-xl font-semibold">Grow when you need to.</h3>
+                <p class="mt-4 max-w-sm text-sm leading-6 text-black/50">
+                  Start small, add capacity automatically and keep your infrastructure aligned with real demand.
+                </p>
+              </article>
+              <article class="border-t border-black/10 p-7">
+                <div class="mb-10 flex
