@@ -87,6 +87,28 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
+    // --- Touch support ---------------------------------------------------
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    slider.addEventListener("touchstart", (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    slider.addEventListener("touchend", (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+
+      const swipeDistance = touchStartX - touchEndX;
+
+      if (swipeDistance > 50) {
+        nextSlide();
+      }
+
+      if (swipeDistance < -50) {
+        prevSlide();
+      }
+    });
+
     // --- Initialization --------------------------------------------------
     slider.dataset.initialized = "true";
     goToSlide(0);
