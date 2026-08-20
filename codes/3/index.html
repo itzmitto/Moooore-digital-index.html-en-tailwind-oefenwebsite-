@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Simple Slider</title>
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="w-[400px] overflow-hidden rounded-xl">
+      <div id="slider" class="flex transition-transform duration-500">
+        <img src="https://picsum.photos/400/250?1" class="w-full shrink-0" />
+        <img src="https://picsum.photos/400/250?2" class="w-full shrink-0" />
+        <img src="https://picsum.photos/400/250?3" class="w-full shrink-0" />
+      </div>
+    </div>
+    <script>
+      let currentSlide = 0;
+      const slider = document.getElementById("slider");
+      const totalSlides = slider.children.length;
+      function nextSlide() {
+        currentSlide++;
+        if (currentSlide >= totalSlides) {
+          currentSlide = 0;
+        }
+        slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+      }
+      setInterval(nextSlide, 3000);
+    </script>
+  </body>
+</html>
