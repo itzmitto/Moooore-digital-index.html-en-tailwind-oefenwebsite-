@@ -6,6 +6,10 @@
     <title>Image Slider</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="script.js" defer></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+    />
   </head>
   <body
     class="min-h-screen bg-gradient-to-br from-sky-100 to-blue-200 flex items-center justify-center p-6"
@@ -46,14 +50,14 @@
             aria-label="Previous image"
             class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/90 text-slate-800 shadow hover:bg-white transition hidden sm:flex items-center justify-center"
           >
-            ←
+            <i class="fa-solid fa-chevron-left"></i>
           </button>
           <button
             id="nextBtn"
             aria-label="Next image"
             class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/90 text-slate-800 shadow hover:bg-white transition hidden sm:flex items-center justify-center"
           >
-            →
+            <i class="fa-solid fa-chevron-right"></i>
           </button>
         </div>
         <div
