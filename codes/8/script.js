@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const sliders = document.querySelectorAll(".image-slider");
 
   sliders.forEach((slider) => {
-    // Prevent re-initialization if already set up
     if (slider.dataset.initialized === "true") return;
 
     const sliderContainer = slider.querySelector("#slider");
@@ -11,13 +10,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const slideItems = sliderContainer.querySelectorAll("img");
     if (slideItems.length === 0) return;
 
-    // --- Arrow buttons ---------------------------------------------------
+    // --- arror buttons ---
     const prevBtn = slider.querySelector("#prevBtn");
     const nextBtn = slider.querySelector("#nextBtn");
 
     if (!prevBtn || !nextBtn) return;
 
-    // --- Pagination dots -------------------------------------------------
+    // --- de dots ---
     const dotsContainer = slider.querySelector("#dots");
     if (!dotsContainer) return;
 
@@ -35,7 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
       dots.push(dot);
     }
 
-    // --- Slider state and logic -----------------------------------------
     let currentIndex = 0;
     const total = slideItems.length;
 
@@ -55,7 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const goToSlide = (index) => {
-      // Loop wrapping: prev from first goes to last, next from last goes to first
       if (index < 0) index = total - 1;
       if (index >= total) index = 0;
 
@@ -68,7 +65,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const nextSlide = () => goToSlide(currentIndex + 1);
     const prevSlide = () => goToSlide(currentIndex - 1);
 
-    // --- Event wiring ----------------------------------------------------
     prevBtn.addEventListener("click", prevSlide);
     nextBtn.addEventListener("click", nextSlide);
 
@@ -76,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
       dot.addEventListener("click", () => goToSlide(i));
     });
 
-    // --- Keyboard support ------------------------------------------------
+    // --- keyboard keys left en right ---
     slider.addEventListener("keydown", (e) => {
       if (e.key === "ArrowLeft") {
         e.preventDefault();
@@ -87,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // --- Touch support ---------------------------------------------------
+    // --- touch keys ---
     let touchStartX = 0;
     let touchEndX = 0;
 
@@ -109,7 +105,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // --- Initialization --------------------------------------------------
     slider.dataset.initialized = "true";
     goToSlide(0);
   });
