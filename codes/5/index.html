@@ -46,6 +46,35 @@
     </div>
     <div id="dots" class="flex justify-center gap-2 mt-4"></div>
   </div>
-  
+  <script>
+    const carousel = document.getElementById("carousel");
+    const total = carousel.children.length;
+    const dots = document.getElementById("dots");
+    let current = 0;
+    for (let i = 0; i < total; i++) {
+      const dot = document.createElement("button");
+      dot.className = "w-2.5 h-2.5 rounded-full bg-gray-600";
+      dot.onclick = () => {
+        current = i;
+        update();
+      };
+      dots.appendChild(dot);
+    }
+    function update() {
+      carousel.style.transform = `translateX(-${current * 100}%)`;
+      [...dots.children].forEach((dot, i) => {
+        dot.className = `w-2.5 h-2.5 rounded-full ${i === current ? "bg-white" : "bg-gray-600"}`;
+      });
+    }
+    document.getElementById("next").onclick = () => {
+      current = (current + 1) % total;
+      update();
+    };
+    document.getElementById("prev").onclick = () => {
+      current = (current - 1 + total) % total;
+      update();
+    };
+    update();
+  </script>
 </body>
 </html>
