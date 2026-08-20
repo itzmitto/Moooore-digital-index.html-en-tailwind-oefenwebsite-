@@ -70,5 +70,45 @@
       </button>
       <div id="dots" class="flex justify-center gap-2 mt-4"></div>
     </div>
+    <script>
+      const slider = document.getElementById("slider");
+      const slides = slider.children.length;
+      const dots = document.getElementById("dots");
+      let currentSlide = 0;
+      for (let i = 0; i < slides; i++) {
+        const dot = document.createElement("button");
+        dot.classList.add("w-3", "h-3", "rounded-full", "bg-gray-400");
+        dot.addEventListener("click", () => {
+          currentSlide = i;
+          showSlide();
+        });
+        dots.appendChild(dot);
+      }
+      const dotButtons = dots.children;
+      function showSlide() {
+        slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+        for (let i = 0; i < slides; i++) {
+          dotButtons[i].classList.remove("bg-gray-800");
+          dotButtons[i].classList.add("bg-gray-400");
+        }
+        dotButtons[currentSlide].classList.remove("bg-gray-400");
+        dotButtons[currentSlide].classList.add("bg-gray-800");
+      }
+      document.getElementById("next").addEventListener("click", () => {
+        currentSlide++;
+        if (currentSlide >= slides) {
+          currentSlide = 0;
+        }
+        showSlide();
+      });
+      document.getElementById("prev").addEventListener("click", () => {
+        currentSlide--;
+        if (currentSlide < 0) {
+          currentSlide = slides - 1;
+        }
+        showSlide();
+      });
+      showSlide();
+    </script>
   </body>
 </html>
