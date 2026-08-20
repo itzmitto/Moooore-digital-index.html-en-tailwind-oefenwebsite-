@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Testimonial Carousel</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-white px-6 py-10 font-serif text-[#30221d]">
+  <section class="mx-auto max-w-[1400px]">
+    <div class="relative overflow-hidden rounded-[26px] bg-[#e8e6bc] px-8 py-16 sm:px-16 sm:py-20 lg:min-h-[625px] lg:px-32">
+      <button
+        onclick="previousSlide()"
+        class="absolute left-5 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-2xl border border-[#8d8a68]/40 bg-transparent text-2xl transition hover:bg-white/20"
+        aria-label="Vorige testimonial"
+      >
+        ←
+      </button>
+      <button
+        onclick="nextSlide()"
+        class="absolute right-5 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-2xl border border-[#8d8a68]/40 bg-transparent text-2xl transition hover:bg-white/20"
+        aria-label="Volgende testimonial"
+      >
+        →
+      </button>
+      <div class="flex min-h-[500px] items-center justify-center">
+        <div class="w-full max-w-[1000px] text-center">
+          <div class="mb-10 text-4xl leading-none text-[#4b372f] sm:text-5xl">
+            “
+          </div>
+          <h1 id="quote" class="text-3xl font-medium italic leading-[1.15] sm:text-4xl lg:text-[42px]">
+            Vanaf het eerste ontwerp tot de laatste schroef voelde HEASS als een partner die écht begrijpt wat paarden nodig hebben.
+          </h1>
+          <div class="mt-10 flex items-center justify-center gap-4">
+            <img
+              id="personImage"
+              src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=80"
+              alt="Klant"
+              class="h-16 w-16 rounded-full border-4 border-[#f3f0d4] object-cover"
+            >
+            <div class="text-left font-sans">
+              <p id="personName" class="text-base font-semibold">
+                Familie Dekker
+              </p>
+              <p id="personCompany" class="text-sm">
+                Stoeterij De Roskam
+              </p>
+            </div>
+          </div>
+          <div id="dots" class="mt-16 flex justify-center gap-2"></div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-1 h-1 bg-[#d9d7aa]"></div>
+  </section>
+  <script>
+    const testimonials = [
+      {
+        quote: "Vanaf het eerste ontwerp tot de laatste schroef voelde HEASS als een partner die écht begrijpt wat paarden nodig hebben.",
+        name: "Familie Dekker",
+        company: "Stoeterij De Roskam",
+        image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=80"
+      },
+      {
+        quote: "De samenwerking verliep ontzettend prettig en het eindresultaat is precies geworden zoals we voor ogen hadden.",
+        name: "Lisa Jansen",
+        company: "Equi Solutions",
+        image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80"
+      },
+      {
+        quote: "Van het eerste gesprek tot de oplevering was alles persoonlijk, duidelijk en professioneel geregeld.",
+        name: "Mark van Dijk",
+        company: "Horse Valley",
+        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80"
+      }
+    ];
+    let currentSlide = 0;
+    const quote = document.getElementById("quote");
+    const personName = document.getElementById("personName");
+    const personCompany = document.getElementById("personCompany");
+    const personImage = document.getElementById("personImage");
+    const dots = document.getElementById("dots");
+    function showSlide() {
+      const testimonial = testimonials[currentSlide];
+      quote.textContent = testimonial.quote;
+      personName.textContent = testimonial.name;
+      personCompany.textContent = testimonial.company;
+      personImage.src = testimonial.image;
+      dots.innerHTML = "";
+      testimonials.forEach((_, index) => {
+        const dot = document.createElement("button");
+        dot.className = `h-3 w-3 rounded-full transition ${
+          index === currentSlide
+            ? "bg-[#49362f]"
+            : "bg-white"
+        }`;
+        dot.onclick = () => {
+          currentSlide = index;
+          showSlide();
+        };
+        dots.appendChild(dot);
+      });
+    }
+    function nextSlide() {
+      currentSlide++;
+      if (currentSlide >= testimonials.length) {
+        currentSlide = 0;
+      }
+      showSlide();
+    }
+    function previousSlide() {
+      currentSlide--;
+      if (currentSlide < 0) {
+        currentSlide = testimonials.length - 1;
+      }
+      showSlide();
+    }
+    showSlide();
+  </script>
+</body>
+</html>
