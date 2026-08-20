@@ -1,57 +1,94 @@
-const slider = document.getElementById("slider");
-const prevBtn = document.getElementById("prevBtn");
-const nextBtn = document.getElementById("nextBtn");
-const dotsContainer = document.getElementById("dots");
+document.addEventListener("DOMContentLoaded", () => {
+  const sliders = document.querySelectorAll(".image-slider");
 
-let currentIndex = 0;
+  sliders.forEach((slider) => {
+    // Prevent re-initialization if already set up
+    if (slider.dataset.initialized === "true") return;
 
-const slides = slider.querySelectorAll("img");
-const totalSlides = slides.length;
+    const sliderContainer = slider.querySelector("#slider");
+    if (!sliderContainer) return;
 
-for (let i = 0; i < totalSlides; i++) {
-  const dot = document.createElement("button");
-  dot.className =
-    "w-3 h-3 rounded-full bg-sky-200 transition-colors duration-300";
-  dot.addEventListener("click", () => {
-    currentIndex = i;
-    updateSlider();
-  });
-  dotsContainer.appendChild(dot);
-}
+    const slideItems = sliderContainer.querySelectorAll("img");
+    if (slideItems.length === 0) return;
 
-const dots = dotsContainer.querySelectorAll("button");
+    // --- Arrow buttons ---------------------------------------------------
+    const prevBtn = slider.querySelector("#prevBtn");
+    const nextBtn = slider.querySelector("#nextBtn");
 
-function updateSlider() {
-  slider.style.transform = `translateX(-${currentIndex * 100}%)`;
-  dots.forEach((dot, i) => {
-    if (i === currentIndex) {
-      dot.classList.remove("bg-sky-200");
-      dot.classList.add("bg-sky-500");
-    } else {
-      dot.classList.remove("bg-sky-500");
-      dot.classList.add("bg-sky-200");
+    if (!prevBtn || !nextBtn) return;
+
+    // --- Pagination dots -------------------------------------------------
+    const dotsContainer = slider.querySelector("#dots");
+    if (!dotsContainer) return;
+
+    const dots = [];
+
+    for (let i = 0; i < slideItems.length; i++) {
+      const dot = document.createElement("button");
+
+      dot.className =
+        "image-slider__dot w-3 h-3 rounded-full bg-sky-200 transition-colors duration-300";
+
+      dot.setAttribute("aria-label", `Go to slide ${i + 1}`);
+
+      dotsContainer.appendChild(dot);
+      dots.push(dot);
     }
+
+    // --- Slider state and logic -----------------------------------------
+    let currentIndex = 0;
+    const total = slideItems.length;
+
+    const updateSlider = () => {
+      sliderContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+    };
+
+    const updateDots = () => {
+      dots.forEach((dot, i) => {
+        const active = i === currentIndex;
+
+        dot.classList.toggle("bg-sky-500", active);
+        dot.classList.toggle("bg-sky-200", !active);
+
+        dot.setAttribute("aria-current", active ? "true" : "false");
+      });
+    };
+
+    const goToSlide = (index) => {
+      // Loop wrapping: prev from first goes to last, next from last goes to first
+      if (index < 0) index = total - 1;
+      if (index >= total) index = 0;
+
+      currentIndex = index;
+
+      updateSlider();
+      updateDots();
+    };
+
+    const nextSlide = () => goToSlide(currentIndex + 1);
+    const prevSlide = () => goToSlide(currentIndex - 1);
+
+    // --- Event wiring ----------------------------------------------------
+    prevBtn.addEventListener("click", prevSlide);
+    nextBtn.addEventListener("click", nextSlide);
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener("click", () => goToSlide(i));
+    });
+
+    // --- Keyboard support ------------------------------------------------
+    slider.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        nextSlide();
+      }
+    });
+
+    // --- Initialization --------------------------------------------------
+    slider.dataset.initialized = "true";
+    goToSlide(0);
   });
-}
-
-nextBtn.addEventListener("click", () => {
-  currentIndex++;
-
-  if (currentIndex >= totalSlides) {
-    currentIndex = 0;
-  }
-
-  updateSlider();
 });
-
-prevBtn.addEventListener("click", () => {
-  currentIndex--;
-
-  if (currentIndex < 0) {
-    currentIndex = totalSlides - 1;
-  }
-
-  updateSlider();
-});
-
-updateSlider();
