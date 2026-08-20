@@ -193,5 +193,76 @@
         </button>
       </div>
     </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const slider = document.querySelector("#testimonial-slider");
+        const sliderContainer = document.querySelector("#slider-container");
+        const slideItems = sliderContainer.querySelectorAll(":scope > div");
+        const prevBtn = document.querySelector("#prev-btn");
+        const nextBtn = document.querySelector("#next-btn");
+        const dotsContainer = document.querySelector("#dots");
+        let currentIndex = 0;
+        const total = slideItems.length;
+        slideItems.forEach((slide, i) => {
+          const dot = document.createElement("button");
+          dot.className = "w-2.5 h-2.5 rounded-full bg-gray-300 transition";
+          dot.setAttribute("aria-label", `Go to slide ${i + 1}`);
+          dot.addEventListener("click", () => goToSlide(i));
+          dotsContainer.appendChild(dot);
+        });
+        const dots = dotsContainer.querySelectorAll("button");
+        function updateDots() {
+          dots.forEach((dot, i) => {
+            dot.classList.toggle("bg-black", i === currentIndex);
+            dot.classList.toggle("bg-gray-300", i !== currentIndex);
+          });
+        }
+        function goToSlide(index) {
+          if (index < 0) index = total - 1;
+          if (index >= total) index = 0;
+          currentIndex = index;
+          sliderContainer.scrollTo({
+            left: slideItems[index].offsetLeft,
+            behavior: "smooth",
+          });
+          updateDots();
+        }
+        function nextSlide() {
+          goToSlide(currentIndex + 1);
+        }
+        function prevSlide() {
+          goToSlide(currentIndex - 1);
+        }
+        prevBtn.addEventListener("click", prevSlide);
+        nextBtn.addEventListener("click", nextSlide);
+        slider.addEventListener("keydown", (e) => {
+          if (e.key === "ArrowLeft") {
+            e.preventDefault();
+            prevSlide();
+          }
+          if (e.key === "ArrowRight") {
+            e.preventDefault();
+            nextSlide();
+          }
+        });
+        sliderContainer.addEventListener("scroll", () => {
+          const scrollLeft = sliderContainer.scrollLeft;
+          let closestIndex = 0;
+          let closestDistance = Infinity;
+          slideItems.forEach((slide, i) => {
+            const distance = Math.abs(slide.offsetLeft - scrollLeft);
+            if (distance < closestDistance) {
+              closestDistance = distance;
+              closestIndex = i;
+            }
+          });
+          if (closestIndex !== currentIndex) {
+            currentIndex = closestIndex;
+            updateDots();
+          }
+        });
+        goToSlide(0);
+      });
+    </script>
   </body>
 </html>
