@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Blue Slider</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+    />
+  </head>
+  <body class="min-h-screen flex items-center justify-center p-6">
+    <div class="w-full max-w-4xl">
+      <div class="slider relative overflow-hidden rounded-3xl shadow-2xl">
+        <div
+          id="slides"
+          class="flex transition-transform duration-500 ease-in-out"
+        >
+          <div class="slide min-w-full">
+            <img
+              src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80"
+              alt="Mountain"
+            />
+            <div class="caption">
+              <h2>Mountain Escape</h2>
+              <p>Beautiful places and fresh air.</p>
+            </div>
+          </div>
+          <div class="slide min-w-full">
+            <img
+              src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
+              alt="Beach"
+            />
+            <div class="caption">
+              <h2>Blue Ocean</h2>
+              <p>Relax and enjoy the view.</p>
+            </div>
+          </div>
+          <div class="slide min-w-full">
+            <img
+              src="https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=1200&q=80"
+              alt="Forest"
+            />
+            <div class="caption">
+              <h2>Deep Forest</h2>
+              <p>A peaceful place surrounded by nature.</p>
+            </div>
+          </div>
+          <div class="slide min-w-full">
+            <img
+              src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=80"
+              alt="Lake"
+            />
+            <div class="caption">
+              <h2>Calm Lake</h2>
+              <p>A simple view with beautiful colors.</p>
+            </div>
+          </div>
+        </div>
+        <button id="prev" class="arrow left-4">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+        <button id="next" class="arrow right-4">
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+        <div
+          id="dots"
+          class="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2"
+        ></div>
+      </div>
+    </div>
+    
+  </body>
+</html>
