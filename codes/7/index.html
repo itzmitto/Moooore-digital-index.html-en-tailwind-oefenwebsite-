@@ -3,74 +3,61 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Simple Blue Slider</title>
+    <title>Simple Slider</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="styles.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
     />
   </head>
-  <body class="min-h-screen flex items-center justify-center p-6">
+  <body
+    class="min-h-screen flex items-center justify-center bg-gradient-to-br from-sky-100 via-blue-50 to-cyan-100 p-6"
+  >
     <div class="w-full max-w-4xl">
-      <div class="slider relative overflow-hidden rounded-3xl shadow-2xl">
-        <div
-          id="slides"
-          class="flex transition-transform duration-500 ease-in-out"
-        >
-          <div class="slide min-w-full">
-            <img
-              src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80"
-              alt="Mountain"
-            />
-            <div class="caption">
-              <h2>Mountain Escape</h2>
-              <p>Beautiful places and fresh air.</p>
+      <div class="bg-white/70 backdrop-blur-md rounded-3xl shadow-xl p-6">
+        <div class="relative overflow-hidden rounded-2xl">
+          <div id="slider" class="flex transition-transform duration-500">
+            <div class="min-w-full">
+              <img
+                src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80"
+                class="w-full h-96 object-cover rounded-2xl"
+              />
+            </div>
+            <div class="min-w-full">
+              <img
+                src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80"
+                class="w-full h-96 object-cover rounded-2xl"
+              />
+            </div>
+            <div class="min-w-full">
+              <img
+                src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=80"
+                class="w-full h-96 object-cover rounded-2xl"
+              />
+            </div>
+            <div class="min-w-full">
+              <img
+                src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=1200&q=80"
+                class="w-full h-96 object-cover rounded-2xl"
+              />
             </div>
           </div>
-          <div class="slide min-w-full">
-            <img
-              src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
-              alt="Beach"
-            />
-            <div class="caption">
-              <h2>Blue Ocean</h2>
-              <p>Relax and enjoy the view.</p>
-            </div>
-          </div>
-          <div class="slide min-w-full">
-            <img
-              src="https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=1200&q=80"
-              alt="Forest"
-            />
-            <div class="caption">
-              <h2>Deep Forest</h2>
-              <p>A peaceful place surrounded by nature.</p>
-            </div>
-          </div>
-          <div class="slide min-w-full">
-            <img
-              src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=80"
-              alt="Lake"
-            />
-            <div class="caption">
-              <h2>Calm Lake</h2>
-              <p>A simple view with beautiful colors.</p>
-            </div>
-          </div>
+          <button
+            id="prev"
+            class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-blue-500 w-12 h-12 rounded-full shadow flex items-center justify-center transition"
+          >
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <button
+            id="next"
+            class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-blue-500 w-12 h-12 rounded-full shadow flex items-center justify-center transition"
+          >
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
         </div>
-        <button id="prev" class="arrow left-4">
-          <i class="fa-solid fa-arrow-left"></i>
-        </button>
-        <button id="next" class="arrow right-4">
-          <i class="fa-solid fa-arrow-right"></i>
-        </button>
-        <div
-          id="dots"
-          class="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2"
-        ></div>
+        <div id="dots" class="flex justify-center gap-2 mt-5"></div>
       </div>
     </div>
-    
+    <script src="script.js"></script>
   </body>
 </html>
