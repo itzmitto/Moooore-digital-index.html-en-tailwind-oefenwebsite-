@@ -1,11 +1,197 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Testimonial Slider</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 min-h-screen flex items-center justify-center p-6">
+    <div id="testimonial-slider" class="w-full max-w-3xl relative">
+      <div
+        id="slider-container"
+        class="flex overflow-hidden snap-x snap-mandatory scroll-smooth rounded-2xl"
+      >
+        <div class="min-w-full snap-start p-8 bg-white rounded-2xl shadow-sm">
+          <div class="flex items-center gap-4 mb-6">
+            <img
+              src="https://i.pravatar.cc/100?img=1"
+              class="w-12 h-12 rounded-full"
+              alt="John"
+            />
+            <div>
+              <h2 class="font-semibold text-lg">John Doe</h2>
+              <p class="text-sm text-gray-500">Developer</p>
+            </div>
+          </div>
+          <p class="text-gray-600 text-lg leading-relaxed">
+            “This is an amazing service. Everything was simple, fast and easy to
+            use.”
+          </p>
+        </div>
+        <div class="min-w-full snap-start p-8 bg-white rounded-2xl shadow-sm">
+          <div class="flex items-center gap-4 mb-6">
+            <img
+              src="https://i.pravatar.cc/100?img=2"
+              class="w-12 h-12 rounded-full"
+              alt="Sarah"
+            />
+            <div>
+              <h2 class="font-semibold text-lg">Sarah Smith</h2>
+              <p class="text-sm text-gray-500">Designer</p>
+            </div>
+          </div>
+          <p class="text-gray-600 text-lg leading-relaxed">
+            “I really love how clean and easy everything feels. Highly
+            recommended.”
+          </p>
+        </div>
+        <div class="min-w-full snap-start p-8 bg-white rounded-2xl shadow-sm">
+          <div class="flex items-center gap-4 mb-6">
+            <img
+              src="https://i.pravatar.cc/100?img=3"
+              class="w-12 h-12 rounded-full"
+              alt="Mike"
+            />
+            <div>
+              <h2 class="font-semibold text-lg">Mike Johnson</h2>
+              <p class="text-sm text-gray-500">Freelancer</p>
+            </div>
+          </div>
+          <p class="text-gray-600 text-lg leading-relaxed">
+            “The experience was fantastic from beginning to end. Super easy.”
+          </p>
+        </div>
+        <div class="min-w-full snap-start p-8 bg-white rounded-2xl shadow-sm">
+          <div class="flex items-center gap-4 mb-6">
+            <img
+              src="https://i.pravatar.cc/100?img=4"
+              class="w-12 h-12 rounded-full"
+              alt="Emma"
+            />
+            <div>
+              <h2 class="font-semibold text-lg">Emma Wilson</h2>
+              <p class="text-sm text-gray-500">Product Manager</p>
+            </div>
+          </div>
+          <p class="text-gray-600 text-lg leading-relaxed">
+            “Everything works perfectly and the interface looks beautiful.”
+          </p>
+        </div>
+        <div class="min-w-full snap-start p-8 bg-white rounded-2xl shadow-sm">
+          <div class="flex items-center gap-4 mb-6">
+            <img
+              src="https://i.pravatar.cc/100?img=5"
+              class="w-12 h-12 rounded-full"
+              alt="David"
+            />
+            <div>
+              <h2 class="font-semibold text-lg">David Brown</h2>
+              <p class="text-sm text-gray-500">Entrepreneur</p>
+            </div>
+          </div>
+          <p class="text-gray-600 text-lg leading-relaxed">
+            “Very smooth experience and exactly what I was looking for.”
+          </p>
+        </div>
+        <div class="min-w-full snap-start p-8 bg-white rounded-2xl shadow-sm">
+          <div class="flex items-center gap-4 mb-6">
+            <img
+              src="https://i.pravatar.cc/100?img=6"
+              class="w-12 h-12 rounded-full"
+              alt="Lisa"
+            />
+            <div>
+              <h2 class="font-semibold text-lg">Lisa Anderson</h2>
+              <p class="text-sm text-gray-500">Marketing</p>
+            </div>
+          </div>
+          <p class="text-gray-600 text-lg leading-relaxed">
+            “The design is simple, modern and very easy to understand.”
+          </p>
+        </div>
+        <div class="min-w-full snap-start p-8 bg-white rounded-2xl shadow-sm">
+          <div class="flex items-center gap-4 mb-6">
+            <img
+              src="https://i.pravatar.cc/100?img=7"
+              class="w-12 h-12 rounded-full"
+              alt="Chris"
+            />
+            <div>
+              <h2 class="font-semibold text-lg">Chris Taylor</h2>
+              <p class="text-sm text-gray-500">Software Engineer</p>
+            </div>
+          </div>
+          <p class="text-gray-600 text-lg leading-relaxed">
+            “I would definitely use this again. Everything was quick and
+            reliable.”
+          </p>
+        </div>
+        <div class="min-w-full snap-start p-8 bg-white rounded-2xl shadow-sm">
+          <div class="flex items-center gap-4 mb-6">
+            <img
+              src="https://i.pravatar.cc/100?img=8"
+              class="w-12 h-12 rounded-full"
+              alt="Olivia"
+            />
+            <div>
+              <h2 class="font-semibold text-lg">Olivia Davis</h2>
+              <p class="text-sm text-gray-500">Photographer</p>
+            </div>
+          </div>
+          <p class="text-gray-600 text-lg leading-relaxed">
+            “Honestly one of the easiest tools I have used in a long time.”
+          </p>
+        </div>
+        <div class="min-w-full snap-start p-8 bg-white rounded-2xl shadow-sm">
+          <div class="flex items-center gap-4 mb-6">
+            <img
+              src="https://i.pravatar.cc/100?img=9"
+              class="w-12 h-12 rounded-full"
+              alt="Daniel"
+            />
+            <div>
+              <h2 class="font-semibold text-lg">Daniel Miller</h2>
+              <p class="text-sm text-gray-500">Business Owner</p>
+            </div>
+          </div>
+          <p class="text-gray-600 text-lg leading-relaxed">
+            “Great quality, simple design and a really nice experience overall.”
+          </p>
+        </div>
+        <div class="min-w-full snap-start p-8 bg-white rounded-2xl shadow-sm">
+          <div class="flex items-center gap-4 mb-6">
+            <img
+              src="https://i.pravatar.cc/100?img=10"
+              class="w-12 h-12 rounded-full"
+              alt="Sophia"
+            />
+            <div>
+              <h2 class="font-semibold text-lg">Sophia Wilson</h2>
+              <p class="text-sm text-gray-500">Content Creator</p>
+            </div>
+          </div>
+          <p class="text-gray-600 text-lg leading-relaxed">
+            “I love the simplicity. It does exactly what I need without being
+            complicated.”
+          </p>
+        </div>
+      </div>
+      <div class="flex items-center justify-between mt-6">
+        <button
+          id="prev-btn"
+          class="w-10 h-10 rounded-full bg-black text-white hover:bg-gray-800 transition"
+        >
+          ←
+        </button>
+        <div id="dots" class="flex items-center gap-2"></div>
+        <button
+          id="next-btn"
+          class="w-10 h-10 rounded-full bg-black text-white hover:bg-gray-800 transition"
+        >
+          →
+        </button>
+      </div>
+    </div>
+  </body>
 </html>
