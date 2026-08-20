@@ -8,7 +8,8 @@
     <script src="script.js" defer></script>
   </head>
   <body
-    class="min-h-screen bg-gradient-to-br from-sky-100 to-blue-200 flex items-center justify-center p-6">
+    class="min-h-screen bg-gradient-to-br from-sky-100 to-blue-200 flex items-center justify-center p-6"
+  >
     <main class="w-full max-w-3xl">
       <h1 class="text-4xl font-bold text-slate-800 text-center mb-3">
         Image Slider
@@ -16,42 +17,49 @@
       <p class="text-slate-600 text-center mb-8">
         Project 1 van mijn eigen UI library.
       </p>
-      <section class="image-slider bg-white rounded-2xl shadow-xl p-4">
+      <section
+        class="image-slider relative bg-white rounded-2xl shadow-xl p-4 sm:p-6"
+      >
         <div class="relative overflow-hidden rounded-xl">
           <div
             id="slider"
-            class="flex transition-transform duration-500 ease-in-out"
+            class="flex transition-transform duration-500 ease-in-out touch-pan-x"
           >
             <img
               src="https://picsum.photos/id/1015/900/500"
               alt="Random image 1"
-              class="w-full flex-shrink-0 object-cover"
+              class="w-full min-w-full flex-shrink-0 aspect-[16/9] object-cover"
             />
             <img
               src="https://picsum.photos/id/1016/900/500"
               alt="Random image 2"
-              class="w-full flex-shrink-0 object-cover"
+              class="w-full min-w-full flex-shrink-0 aspect-[16/9] object-cover"
             />
             <img
               src="https://picsum.photos/id/1018/900/500"
               alt="Random image 3"
-              class="w-full flex-shrink-0 object-cover"
+              class="w-full min-w-full flex-shrink-0 aspect-[16/9] object-cover"
             />
           </div>
           <button
             id="prevBtn"
-            class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 text-slate-800 shadow hover:bg-white"
+            aria-label="Previous image"
+            class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/90 text-slate-800 shadow hover:bg-white transition hidden sm:flex items-center justify-center"
           >
             ←
           </button>
           <button
             id="nextBtn"
-            class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 text-slate-800 shadow hover:bg-white"
+            aria-label="Next image"
+            class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/90 text-slate-800 shadow hover:bg-white transition hidden sm:flex items-center justify-center"
           >
             →
           </button>
         </div>
-        <div id="dots" class="flex justify-center gap-2 mt-4"></div>
+        <div
+          id="dots"
+          class="flex justify-center items-center gap-2 mt-4"
+        ></div>
       </section>
     </main>
   </body>
