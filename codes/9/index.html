@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQ Accordion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="script.js" defer></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+    />
+  </head>
+  <body
+    class="min-h-screen bg-gradient-to-br from-sky-100 to-blue-200 flex items-center justify-center p-6"
+  >
+    <main class="w-full max-w-2xl">
+      <h1 class="text-4xl font-bold text-slate-800 text-center mb-3">
+        FAQ Accordion
+      </h1>
+      <p class="text-slate-600 text-center mb-8">
+        Project 2 van mijn eigen UI library.
+      </p>
+      <section class="faq-accordion space-y-3">
+        <article class="bg-white rounded-xl shadow-md overflow-hidden">
+          <button
+            class="faq-question w-full flex items-center justify-between p-5 text-left text-slate-800 font-semibold"
+          >
+            <span>Wat is Tailwind CSS?</span>
+            <i
+              class="fa-solid fa-chevron-down transition-transform duration-300"
+            ></i>
+          </button>
+          <div class="faq-answer hidden px-5 pb-5 text-slate-600">
+            Tailwind CSS is een utility-first CSS framework waarmee je snel
+            interfaces kunt bouwen met utility classes.
+          </div>
+        </article>
+        <article class="bg-white rounded-xl shadow-md overflow-hidden">
+          <button
+            class="faq-question w-full flex items-center justify-between p-5 text-left text-slate-800 font-semibold"
+          >
+            <span>Wat doet JavaScript?</span>
+            <i
+              class="fa-solid fa-chevron-down transition-transform duration-300"
+            ></i>
+          </button>
+          <div class="faq-answer hidden px-5 pb-5 text-slate-600">
+            JavaScript maakt websites interactief en kan bijvoorbeeld reageren
+            op clicks, formulieren en andere gebeurtenissen.
+          </div>
+        </article>
+        <article class="bg-white rounded-xl shadow-md overflow-hidden">
+          <button
+            class="faq-question w-full flex items-center justify-between p-5 text-left text-slate-800 font-semibold"
+          >
+            <span>Waarom een UI library maken?</span>
+            <i
+              class="fa-solid fa-chevron-down transition-transform duration-300"
+            ></i>
+          </button>
+          <div class="faq-answer hidden px-5 pb-5 text-slate-600">
+            Zo bouw je herbruikbare componenten die je later opnieuw kunt
+            gebruiken in verschillende projecten.
+          </div>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
