@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>10 Image Slider</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="relative w-[600px]">
+      <div class="overflow-hidden rounded-xl">
+        <div id="slider" class="flex transition-transform duration-500">
+          <img
+            src="https://picsum.photos/id/10/600/350"
+            class="w-full shrink-0"
+          />
+          <img
+            src="https://picsum.photos/id/20/600/350"
+            class="w-full shrink-0"
+          />
+          <img
+            src="https://picsum.photos/id/30/600/350"
+            class="w-full shrink-0"
+          />
+          <img
+            src="https://picsum.photos/id/40/600/350"
+            class="w-full shrink-0"
+          />
+          <img
+            src="https://picsum.photos/id/50/600/350"
+            class="w-full shrink-0"
+          />
+          <img
+            src="https://picsum.photos/id/60/600/350"
+            class="w-full shrink-0"
+          />
+          <img
+            src="https://picsum.photos/id/70/600/350"
+            class="w-full shrink-0"
+          />
+          <img
+            src="https://picsum.photos/id/80/600/350"
+            class="w-full shrink-0"
+          />
+          <img
+            src="https://picsum.photos/id/90/600/350"
+            class="w-full shrink-0"
+          />
+          <img
+            src="https://picsum.photos/id/100/600/350"
+            class="w-full shrink-0"
+          />
+        </div>
+      </div>
+      <button
+        id="prev"
+        class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 w-11 h-11 rounded-full hover:bg-white"
+      >
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <button
+        id="next"
+        class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 w-11 h-11 rounded-full hover:bg-white"
+      >
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+      <div id="dots" class="flex justify-center gap-2 mt-4"></div>
+    </div>
+  </body>
+</html>
