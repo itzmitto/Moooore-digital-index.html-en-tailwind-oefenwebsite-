@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>More Options Menu</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #09090b;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      .menu-wrapper {
+        position: relative;
+      }
+      .more-button {
+        width: 56px;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #eeeef2;
+        border-radius: 16px;
+        background: white;
+        color: #737373;
+        cursor: pointer;
+        font-size: 25px;
+        transition:
+          transform 0.15s ease,
+          background 0.2s ease;
+      }
+      .more-button:hover {
+        background: #fafafa;
+      }
+      .more-button:active {
+        transform: scale(0.95);
+      }
+      .menu {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 50;
+        width: 304px;
+        overflow: hidden;
+        border: 2px solid #eeeef2;
+        border-radius: 16px;
+        background: white;
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
+        opacity: 0;
+        visibility: hidden;
+        transform: translate(-50%, -50%) scale(0.94);
+        transition:
+          opacity 0.2s ease,
+          transform 0.2s ease,
+          visibility 0.2s ease;
+      }
+      .menu.open {
+        opacity: 1;
+        visibility: visible;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      .menu-header {
+        padding: 10px 24px;
+        border-bottom: 2px solid #eeeef2;
+        background: #fafafc;
+      }
+      .menu-header span {
+        color: #828287;
+        font-size: 16px;
+        font-weight: 500;
+      }
+      .menu-items {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 8px;
+      }
+      .menu-item {
+        width: 100%;
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 8px 12px;
+        border: 0;
+        border-radius: 12px;
+        background: transparent;
+        color: #363538;
+        text-align: left;
+        font-size: 18px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.2s ease;
+      }
+      .menu-item:hover {
+        background: #f6f5fa;
+      }
+      .menu-icon {
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #737373;
+        font-size: 20px;
+      }
+      .delete-section {
+        position: relative;
+        height: 64px;
+        overflow: hidden;
+        border-top: 2px solid #eeeef2;
+      }
+      .delete-state {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        padding: 8px;
+        transition:
+          transform 0.3s ease,
+          opacity 0.3s ease;
+      }
+      .delete-state.hidden {
+        transform: translateY(100%);
+        opacity: 0;
+        pointer-events: none;
+      }
+      .delete-button {
+        color: #e94447;
+      }
+      .delete-button:hover {
+        background: #fff0f0;
+      }
+      .confirm-state {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px;
+        transition:
+          transform 0.3s ease,
+          opacity 0.3s ease;
+      }
+      .confirm-state.hidden {
+        transform: translateY(100%);
+        opacity: 0;
+        pointer-events: none;
+      }
+      .confirm-button,
+      .cancel-button {
+        height: 40px;
+        flex: 1;
+        border-radius: 12px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        transition:
+          transform 0.15s ease,
+          background 0.2s ease;
+      }
+      .confirm-button {
+        border: 0;
+        background: #f24140;
+        color: white;
+      }
+      .confirm-button:hover {
+        background: #d93635;
+      }
+      .cancel-button {
+        border: 1px solid #e5e7eb;
+        background: white;
+        color: #4b5563;
+      }
+      .cancel-button:hover {
+        background: #f5f5f5;
+      }
+      .confirm-button:active,
+      .cancel-button:active {
+        transform: scale(0.97);
+      }
+      @media (max-width: 500px) {
+        .menu {
+          width: 260px;
+        }
+        .menu-item {
+          font-size: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="menu-wrapper" id="menuWrapper">
+      <button class="more-button" id="moreButton" aria-label="More options">
+        ⋮
+      </button>
+
+      <div class="menu" id="menu">
+        <div class="menu-header">
+          <span>More Options</span>
+        </div>
+
+        <div class="menu-items">
+          <button class="menu-item" onclick="menuAction('Edit')">
+            <span class="menu-icon">✎</span>
+            <span>Edit</span>
+          </button>
+
+          <button class="menu-item" onclick="menuAction('Duplicate')">
+            <span class="menu-icon">▣</span>
+            <span>Duplicate</span>
+          </button>
+
+          <button class="menu-item" onclick="menuAction('Favourite')">
+            <span class="menu-icon">♡</span>
+            <span>Favourite</span>
+          </button>
+
+          <button class="menu-item" onclick="menuAction('Share')">
+            <span class="menu-icon">↗</span>
+            <span>Share</span>
+          </button>
+        </div>
+
+        <div class="delete-section">
+          <div class="delete-state" id="deleteState">
+            <button class="menu-item delete-button" id="deleteButton">
+              <span class="menu-icon">🗑</span>
+              <span>Delete</span>
+            </button>
+          </div>
+
+          <div class="confirm-state hidden" id="confirmState">
+            <button class="confirm-button" id="confirmDelete">
+              Yes, Delete
+            </button>
+
+            <button class="cancel-button" id="cancelDelete">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const menuWrapper = document.getElementById("menuWrapper");
+      const moreButton = document.getElementById("moreButton");
+      const menu = document.getElementById("menu");
+
+      const deleteButton = document.getElementById("deleteButton");
+      const deleteState = document.getElementById("deleteState");
+
+      const confirmState = document.getElementById("confirmState");
+      const confirmDelete = document.getElementById("confirmDelete");
+      const cancelDelete = document.getElementById("cancelDelete");
+
+      moreButton.addEventListener("click", function (event) {
+        event.stopPropagation();
+        menu.classList.toggle("open");
+      });
+
+      deleteButton.addEventListener("click", function () {
+        deleteState.classList.add("hidden");
+        confirmState.classList.remove("hidden");
+      });
+
+      cancelDelete.addEventListener("click", function () {
+        confirmState.classList.add("hidden");
+        deleteState.classList.remove("hidden");
+      });
+
+      confirmDelete.addEventListener("click", function () {
+        alert("Item deleted!");
+
+        menu.classList.remove("open");
+        confirmState.classList.add("hidden");
+        deleteState.classList.remove("hidden");
+      });
+
+      document.addEventListener("click", function (event) {
+        if (!menuWrapper.contains(event.target)) {
+          menu.classList.remove("open");
+          confirmState.classList.add("hidden");
+          deleteState.classList.remove("hidden");
+        }
+      });
+
+      function menuAction(action) {
+        alert(action + " clicked");
+      }
+    </script>
+  </body>
+</html>
