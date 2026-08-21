@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flickering Grid</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: skyblue;
+            font-family: Arial, sans-serif;
+        }
+        .grid-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            height: 500px;
+            overflow: hidden;
+            border: 1px solid #27272a;
+            border-radius: 12px;
+            background: #09090b;
+        }
+        .grid {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            grid-template-columns: repeat(100, 4px);
+            grid-auto-rows: 4px;
+            gap: 6px;
+            padding: 10px;
+        }
+        .square {
+            width: 4px;
+            height: 4px;
+            background: #6b7280;
+            opacity: 0.1;
+            animation: flicker 2s infinite;
+        }
+        .square:nth-child(3n) {
+            animation-delay: 0.3s;
+        }
+        .square:nth-child(5n) {
+            animation-delay: 0.8s;
+        }
+        .square:nth-child(7n) {
+            animation-delay: 1.2s;
+        }
+        @keyframes flicker {
+            0%, 100% {
+                opacity: 0.05;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-container">
+        <div class="grid" id="grid"></div>
+    </div>
+    <script>
+        const grid = document.getElementById("grid");
+        const columns = 100;
+        const rows = 70;
+        for (let i = 0; i < columns * rows; i++) {
+            const square = document.createElement("div");
+            square.className = "square";
+            square.style.animationDuration = `${1 + Math.random() * 3}s`;
+            square.style.animationDelay = `${Math.random() * 2}s`;
+            grid.appendChild(square);
+        }
+    </script>
+</body>
+</html>
