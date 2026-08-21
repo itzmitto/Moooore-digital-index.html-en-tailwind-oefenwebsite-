@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terminal Animation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: #0f172a;
+      color: white;
+      font-family: monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .terminal {
+      width: 700px;
+      background: #020617;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    }
+    .line {
+      margin: 8px 0;
+      opacity: 0;
+      transform: translateY(5px);
+      animation: show 0.3s forwards;
+    }
+    .green {
+      color: #22c55e;
+    }
+    .blue {
+      color: #3b82f6;
+    }
+    .muted {
+      color: #64748b;
+    }
+    @keyframes show {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="terminal">
+    <div id="terminal"></div>
+  </div>
+  <script>
+    const terminal = document.getElementById("terminal");
+    const lines = [
+      { text: "> pnpm dlx shadcn@latest init", className: "", typing: true },
+      { text: "✔ Preflight checks.", className: "green" },
+      { text: "✔ Verifying framework. Found Next.js.", className: "green" },
+      { text: "✔ Validating Tailwind CSS.", className: "green" },
+      { text: "✔ Validating import alias.", className: "green" },
+      { text: "✔ Writing components.json.", className: "green" },
+      { text: "✔ Checking registry.", className: "green" },
+      { text: "✔ Updating tailwind.config.ts", className: "green" },
+      { text: "✔ Updating app/globals.css", className: "green" },
+      { text: "✔ Installing dependencies.", className: "green" },
+      { text: "ℹ Updated 1 file:", className: "blue" },
+      { text: "  - lib/utils.ts", className: "blue" },
+      { text: "Success! Project initialization completed.", className: "muted" },
+      { text: "You may now add components.", className: "muted" }
+    ];
+    let index = 0;
+    function addLine() {
+      if (index >= lines.length) return;
+      const line = lines[index];
+      const element = document.createElement("div");
+      element.className = `line ${line.className}`;
+      terminal.appendChild(element);
+      if (line.typing) {
+        let charIndex = 0;
+        const typing = setInterval(() => {
+          element.textContent += line.text[charIndex];
+          charIndex++;
+          if (charIndex >= line.text.length) {
+            clearInterval(typing);
+            index++;
+            setTimeout(addLine, 300);
+          }
+        }, 35);
+      } else {
+        element.textContent = line.text;
+        index++;
+        setTimeout(addLine, 300);
+      }
+    }
+    addLine();
+  </script>
+</body>
+</html>
