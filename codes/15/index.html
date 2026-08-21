@@ -3,201 +3,237 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Adaptive Slider</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #09090b;
+            font-family: Arial, sans-serif;
+        }
+        .slider-card {
+            width: 380px;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 48px;
+            border-radius: 36px;
+            background: #fefefe;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.08);
+            user-select: none;
+        }
+        .label {
+            margin-bottom: 8px;
+            color: #878787;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .calorie-display {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 32px;
+        }
+        .calories {
+            min-width: 150px;
+            color: #10b981;
+            font-size: 64px;
+            line-height: 1;
+            font-weight: 800;
+            letter-spacing: -2px;
+            text-align: right;
+            transition: color 0.4s ease;
+        }
+        .unit {
+            color: #010101;
+            font-size: 48px;
+            line-height: 1;
+            font-weight: 800;
+        }
+        .slider {
+            position: relative;
+            width: 100%;
+            height: 52px;
+            overflow: hidden;
+            border-radius: 999px;
+            background: #f1f3f5;
+        }
+        .progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            min-width: 52px;
+            border-radius: 999px;
+            transition:
+                width 0.25s ease,
+                background 0.4s ease;
+        }
+        .dots {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            pointer-events: none;
+        }
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #c4b9fa;
+            opacity: 0.8;
+            transition: background 0.3s ease;
+        }
+        .range-input {
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            cursor: pointer;
+            opacity: 0;
+        }
+        .thumb {
+            position: absolute;
+            top: 0;
+            z-index: 5;
+            width: 52px;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            pointer-events: none;
+            transition: left 0.25s ease;
+        }
+        .thumb-inner {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+        }
+        @media (max-width: 450px) {
+            .slider-card {
+                width: calc(100vw - 30px);
+                height: 500px;
+                padding: 32px;
+            }
+            .calories {
+                font-size: 54px;
+            }
+            .unit {
+                font-size: 40px;
+            }
+        }
+    </style>
 </head>
 <body>
-    'use client';
 
-import { useState, useMemo, type FC, type ChangeEvent } from 'react';
-import { AnimatePresence, motion } from 'motion/react';
-import { cn } from '@/lib/utils';
+    <div class="slider-card">
+        <div class="label">Calories</div>
 
-interface AdaptiveSliderProps {
-  value?: number;
-  min?: number;
-  max?: number;
-  step?: number;
-  defaultValue?: number;
-  onChange?: (value: number) => void;
-}
-
-interface ColorSettings {
-  text: string;
-  gradient: string;
-  thumbBorder: string;
-}
-
-const DEFAULT_MIN = 50;
-const DEFAULT_MAX = 350;
-const DEFAULT_STEP = 25;
-const DEFAULT_VALUE = 200;
-
-const getColorSettings = (
-  value: number,
-  min: number,
-  max: number,
-): ColorSettings => {
-  const percentage = (value - min) / (max - min);
-
-  if (percentage < 0.5) {
-    return {
-      text: '#10B981',
-      gradient: 'linear-gradient(to right, #FEB101, #FE7C09)',
-      thumbBorder: '#10B981',
-    };
-  } else if (percentage < 0.7) {
-    return {
-      text: '#FE55B7',
-      gradient: 'linear-gradient(to right, #FE55B74D, #FE55B7)',
-      thumbBorder: '#F97316',
-    };
-  } else {
-    return {
-      text: '#D946EF',
-      gradient: 'linear-gradient(to right, #DAB0FE, #4946FF)',
-      thumbBorder: '#D946EF',
-    };
-  }
-};
-
-export const AdaptiveSlider: FC<AdaptiveSliderProps> = ({
-  value,
-  min = DEFAULT_MIN,
-  max = DEFAULT_MAX,
-  step = DEFAULT_STEP,
-  defaultValue = DEFAULT_VALUE,
-  onChange,
-}) => {
-  const [internalValue, setInternalValue] = useState<number>(defaultValue);
-
-  const calories = value ?? internalValue;
-
-  const colorSettings = useMemo(
-    () => getColorSettings(calories, min, max),
-    [calories, min, max],
-  );
-
-  const percentage = ((calories - min) / (max - min)) * 100;
-
-  const dots = useMemo(
-    () =>
-      Array.from({ length: 6 }).map((_, i) => (
-        <div
-          key={i}
-          className="z-30 h-1.5 w-1.5 rounded-full bg-[#C4B9FA] transition-colors dark:bg-neutral-600"
-          style={{ opacity: 0.8 }}
-        />
-      )),
-    [],
-  );
-
-  const handleSliderChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const val = Number(e.target.value);
-    setInternalValue(val);
-    onChange?.(val);
-  };
-
-  return (
-    <motion.div className="flex h-[60vh] w-xs flex-col items-center justify-center rounded-[36px] bg-[#FEFEFE] p-6 shadow-2xl shadow-black/5 transition-colors select-none sm:w-sm sm:p-12 dark:bg-neutral-900 dark:shadow-none">
-      <span className="mb-2 text-xl font-bold text-[#878787] sm:text-2xl dark:text-neutral-500">
-        Calories
-      </span>
-
-      <div className="mb-8 flex items-baseline gap-2">
-        <AnimatedText
-          value={calories.toString()}
-          className="overflow-hidden text-5xl font-extrabold tracking-tight sm:text-6xl"
-        />
-        <motion.span
-          layout
-          className="text-4xl font-extrabold text-[#010101] transition-colors sm:text-5xl dark:text-neutral-100"
-        >
-          kCal
-        </motion.span>
-      </div>
-
-      <div className="group relative flex h-13 w-full items-center overflow-hidden rounded-full bg-[#f1f3f5] transition-colors dark:bg-neutral-800">
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-between px-4 transition-colors sm:px-8">
-          {dots}
+        <div class="calorie-display">
+            <div class="calories" id="calories">200</div>
+            <div class="unit">kCal</div>
         </div>
 
-        <motion.div
-          className="pointer-events-none absolute top-0 left-0 h-full rounded-full"
-          animate={{
-            width: `calc((${percentage} / 100) * (100% - 52px) + 52px)`,
-            background: colorSettings.gradient,
-          }}
-          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-        />
+        <div class="slider" id="slider">
+            <div class="progress" id="progress"></div>
 
-        <input
-          title="range"
-          type="range"
-          min={min}
-          max={max}
-          step={step}
-          value={calories}
-          onChange={handleSliderChange}
-          className="absolute inset-0 z-50 h-13 w-full cursor-pointer opacity-0"
-        />
+            <div class="dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
 
-        <motion.div
-          className="pointer-events-none absolute top-0 z-40 flex size-13 items-center justify-center rounded-full border-none"
-          animate={{
-            left: `calc((${percentage} / 100) * (100% - 52px))`,
-          }}
-          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-        >
-          <div className="size-10 rounded-full bg-white shadow-[inset_0_2px_4px_rgba(0,0,0,0.06)]" />
-        </motion.div>
-      </div>
-    </motion.div>
-  );
-};
-
-const AnimatedText = ({
-  value,
-  className,
-}: {
-  value: string;
-  className?: string;
-}) => {
-  return (
-    <div
-      className={cn(
-        'flex text-lg tracking-tight will-change-transform',
-        className,
-      )}
-    >
-      <AnimatePresence mode="popLayout" initial={false}>
-        {value.split('').map((char, index) => {
-          const displayChar = char === ' ' ? '\u00A0' : char;
-
-          return (
-            <motion.span
-              key={char + index}
-              initial={{ opacity: 1, y: 0, scale: 1 }}
-              animate={{
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                transition: {
-                  type: 'spring',
-                  stiffness: 200,
-                  damping: 20,
-                  // delay: 0.03 * index,
-                },
-              }}
-              exit={{ opacity: 0, y: 0, scale: 1, transition: { duration: 0 } }}
+            <input
+                id="rangeInput"
+                class="range-input"
+                type="range"
+                min="50"
+                max="350"
+                step="25"
+                value="200"
+                title="Calories"
             >
-              {displayChar}
-            </motion.span>
-          );
-        })}
-      </AnimatePresence>
+
+            <div class="thumb" id="thumb">
+                <div class="thumb-inner"></div>
+            </div>
+        </div>
     </div>
-  );
-};
+
+    <script>
+        const rangeInput = document.getElementById("rangeInput");
+        const caloriesElement = document.getElementById("calories");
+        const progress = document.getElementById("progress");
+        const thumb = document.getElementById("thumb");
+
+        const min = 50;
+        const max = 350;
+
+        function updateSlider() {
+            const value = Number(rangeInput.value);
+            const percentage = (value - min) / (max - min);
+            const percent = percentage * 100;
+
+            caloriesElement.textContent = value;
+
+            if (percentage < 0.5) {
+                caloriesElement.style.color = "#10B981";
+
+                progress.style.background =
+                    "linear-gradient(to right, #FEB101, #FE7C09)";
+            } else if (percentage < 0.7) {
+                caloriesElement.style.color = "#FE55B7";
+
+                progress.style.background =
+                    "linear-gradient(to right, #FE55B74D, #FE55B7)";
+            } else {
+                caloriesElement.style.color = "#D946EF";
+
+                progress.style.background =
+                    "linear-gradient(to right, #DAB0FE, #4946FF)";
+            }
+
+            const sliderWidth = rangeInput.offsetWidth;
+            const thumbWidth = 52;
+
+            const thumbPosition =
+                percentage * (sliderWidth - thumbWidth);
+
+            thumb.style.left = `${thumbPosition}px`;
+
+            const progressWidth =
+                thumbPosition + thumbWidth;
+
+            progress.style.width = `${progressWidth}px`;
+        }
+
+        rangeInput.addEventListener("input", updateSlider);
+        window.addEventListener("resize", updateSlider);
+
+        updateSlider();
+    </script>
 
 </body>
 </html>
