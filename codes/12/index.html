@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meteors</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #000;
+        font-family: Arial, sans-serif;
+      }
+      .meteor-container {
+        position: relative;
+        display: flex;
+        width: 100%;
+        max-width: 1200px;
+        height: 700px;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        border: 1px solid #27272a;
+        border-radius: 12px;
+        background: #000;
+      }
+      .title {
+        position: relative;
+        z-index: 10;
+        pointer-events: none;
+        background: linear-gradient(to bottom, #fff, #64748b);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        text-align: center;
+        font-size: 8rem;
+        line-height: 1;
+        font-weight: 600;
+      }
+      .meteor {
+        position: absolute;
+        top: -50px;
+        width: 2px;
+        height: 100px;
+        opacity: 0;
+        background: linear-gradient(to bottom, transparent, #fff);
+        transform: rotate(45deg);
+        animation: meteor linear infinite;
+      }
+      .meteor::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 2px;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          rgba(255, 255, 255, 0.8)
+        );
+        filter: blur(1px);
+      }
+      @keyframes meteor {
+        0% {
+          transform: translate(0, 0) rotate(45deg);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          transform: translate(700px, 700px) rotate(45deg);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="meteor-container">
+      <div id="meteors"></div>
+      <span class="title">Meteors</span>
+    </div>
+    <script>
+      const meteorsContainer = document.getElementById("meteors");
+      const numberOfMeteors = 30;
+      for (let i = 0; i < numberOfMeteors; i++) {
+        const meteor = document.createElement("div");
+        meteor.className = "meteor";
+        meteor.style.left = `${Math.random() * 100}%`;
+        meteor.style.animationDuration = `${2 + Math.random() * 3}s`;
+        meteor.style.animationDelay = `${Math.random() * 5}s`;
+        meteor.style.height = `${50 + Math.random() * 100}px`;
+        meteorsContainer.appendChild(meteor);
+      }
+    </script>
+  </body>
+</html>
