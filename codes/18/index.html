@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Color Theme Demo</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="container navbar-inner">
+        <a href="#" class="logo"
+          ><i class="fa-solid fa-palette"></i> ColorTheme</a
+        >
+        <nav class="nav-links">
+          <a href="#home">Home</a>
+          <a href="#features">Features</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <button
+          class="color-picker-button"
+          id="colorPickerButton"
+          type="button"
+          aria-label="Kleur aanpassen"
+        >
+          <i class="fa-solid fa-droplet"></i>
+          <span>Color</span>
+        </button>
+      </div>
+    </header>
+    <main>
+      <section class="hero" id="home">
+        <div class="container hero-content">
+          <div class="hero-text">
+            <span class="eyebrow"
+              ><i class="fa-solid fa-wand-magic-sparkles"></i> Custom
+              Theme</span
+            >
+            <h1>Maak jouw website <span>jouw kleur.</span></h1>
+            <p>
+              Kies zelf een kleur en verander automatisch de primaire kleur van
+              alle buttons, iconen, links en andere onderdelen van de website.
+            </p>
+            <div class="hero-actions">
+              <a href="#features" class="button button-primary"
+                ><i class="fa-solid fa-arrow-right"></i> Bekijk features</a
+              >
+              <button
+                class="button button-secondary"
+                id="heroColorButton"
+                type="button"
+              >
+                <i class="fa-solid fa-palette"></i> Kies een kleur
+              </button>
+            </div>
+          </div>
+          <div class="hero-card">
+            <div class="hero-card-icon">
+              <i class="fa-solid fa-paintbrush"></i>
+            </div>
+            <h2>Live theme</h2>
+            <p>De waarde van <code>--primary</code> wordt direct aangepast.</p>
+            <div class="color-preview">
+              <span class="preview-dot"></span>
+              <span id="primaryValue">#4040F5</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="features">
+        <div class="container">
+          <div class="section-heading">
+            <span class="eyebrow">Features</span>
+            <h2>Alles gebruikt dezelfde <span>primary color.</span></h2>
+            <p>
+              Je hoeft alleen de CSS variable te veranderen. De rest volgt
+              automatisch.
+            </p>
+          </div>
+          <div class="cards">
+            <article class="card">
+              <div class="card-icon"><i class="fa-solid fa-bolt"></i></div>
+              <h3>Buttons</h3>
+              <p>
+                Elke primaire button gebruikt dezelfde
+                <code>--primary</code> kleur.
+              </p>
+              <a href="#" class="text-link"
+                >Meer bekijken <i class="fa-solid fa-arrow-right"></i
+              ></a>
+            </article>
+            <article class="card">
+              <div class="card-icon"><i class="fa-solid fa-link"></i></div>
+              <h3>Links</h3>
+              <p>
+                Links en andere accent-elementen krijgen automatisch dezelfde
+                kleur.
+              </p>
+              <a href="#" class="text-link"
+                >Meer bekijken <i class="fa-solid fa-arrow-right"></i
+              ></a>
+            </article>
+            <article class="card">
+              <div class="card-icon"><i class="fa-solid fa-palette"></i></div>
+              <h3>Theme</h3>
+              <p>
+                Kies een nieuwe kleur en zie de hele pagina live veranderen.
+              </p>
+              <a href="#" class="text-link"
+                >Meer bekijken <i class="fa-solid fa-arrow-right"></i
+              ></a>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="cta-section" id="about">
+        <div class="container cta">
+          <div>
+            <span class="eyebrow">Simple CSS</span>
+            <h2>Één variable. Eén compleet kleurenthema.</h2>
+            <p>
+              De primaire kleur wordt centraal opgeslagen in <code>:root</code>.
+            </p>
+          </div>
+          <button
+            class="button button-primary"
+            id="ctaColorButton"
+            type="button"
+          >
+            <i class="fa-solid fa-droplet"></i> Verander kleur
+          </button>
+        </div>
+      </section>
+    </main>
+    <footer class="footer" id="contact">
+      <div class="container footer-inner">
+        <div>
+          <a href="#" class="logo"
+            ><i class="fa-solid fa-palette"></i> ColorTheme</a
+          >
+          <p>Een simpele website met een live CSS color theme.</p>
+        </div>
+        <div class="footer-links">
+          <a href="#home">Home</a>
+          <a href="#features">Features</a>
+          <a href="#about">About</a>
+        </div>
+      </div>
+    </footer>
+    <div class="color-modal" id="colorModal" aria-hidden="true">
+      <div class="color-modal-backdrop" id="colorModalBackdrop"></div>
+      <div
+        class="color-modal-content"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="colorModalTitle"
+      >
+        <button
+          class="modal-close"
+          id="modalClose"
+          type="button"
+          aria-label="Sluiten"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="modal-header">
+          <div class="modal-icon"><i class="fa-solid fa-palette"></i></div>
+          <div>
+            <h2 id="colorModalTitle">Kies jouw primary color</h2>
+            <p>Je kunt zelf elke kleur selecteren.</p>
+          </div>
+        </div>
+        <label class="color-input-wrapper" for="colorInput">
+          <span class="color-input-preview" id="colorInputPreview"></span>
+          <span class="color-input-text">
+            <strong>Kleur</strong>
+            <small id="colorHex">#4040F5</small>
+          </span>
+          <input type="color" id="colorInput" value="#4040f5" />
+        </label>
+        <div class="preset-colors">
+          <button
+            type="button"
+            class="preset-color preset-blue"
+            data-color="#4040F5"
+            aria-label="Blauw"
+          ></button>
+          <button
+            type="button"
+            class="preset-color preset-purple"
+            data-color="#7C3AED"
+            aria-label="Paars"
+          ></button>
+          <button
+            type="button"
+            class="preset-color preset-green"
+            data-color="#16A34A"
+            aria-label="Groen"
+          ></button>
+          <button
+            type="button"
+            class="preset-color preset-orange"
+            data-color="#EA580C"
+            aria-label="Oranje"
+          ></button>
+          <button
+            type="button"
+            class="preset-color preset-pink"
+            data-color="#DB2777"
+            aria-label="Roze"
+          ></button>
+          <button
+            type="button"
+            class="preset-color preset-red"
+            data-color="#DC2626"
+            aria-label="Rood"
+          ></button>
+        </div>
+        <div class="modal-actions">
+          <button class="button button-secondary" id="resetColor" type="button">
+            <i class="fa-solid fa-rotate-left"></i> Reset
+          </button>
+          <button class="button button-primary" id="applyColor" type="button">
+            <i class="fa-solid fa-check"></i> Toepassen
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
